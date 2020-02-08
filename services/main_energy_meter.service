@@ -1,0 +1,17 @@
+#/etc/systemd/system/main_energy_meter.service
+
+[Unit]
+Description=EnergyMonitoring MainEnergyMeter Service
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+WatchdogSec=3600
+Restart=always
+RestartSec=1
+User=pi
+ExecStart=/usr/bin/python3 /home/pi/EnergyMonitoring/main_energy_meter/main_energy_meter.py
+
+[Install]
+WantedBy=multi-user.target

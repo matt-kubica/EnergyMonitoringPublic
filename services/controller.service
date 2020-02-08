@@ -1,0 +1,25 @@
+#/etc/systemd/system/controller.service
+
+[Unit]
+Description=EnergyMonitoring Controller Service
+
+After=network.target
+After=influxdb.service
+# After=grafana-server.service
+After=mosquittoq.service
+
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+WatchdogSec=3600
+Restart=always
+RestartSec=1
+User=mateusz
+ExecStart=/usr/bin/python3 /home/mateusz/EnergyMonitoring/controller/controller.py
+
+[Install]
+WantedBy=multi-user.target
+
+# useful for service list:
+# systemctl list-units --type service

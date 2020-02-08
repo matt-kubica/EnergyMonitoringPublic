@@ -1,0 +1,17 @@
+#/etc/systemd/system/hp_energy_meter.service
+
+[Unit]
+Description=EnergyMonitoring HpEnergyMeter Service
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+WatchdogSec=3600
+Restart=always
+RestartSec=1
+User=pi
+ExecStart=/usr/bin/python3 /home/pi/EnergyMonitoring/hp_energy_meter/hp_energy_meter.py
+
+[Install]
+WantedBy=multi-user.target

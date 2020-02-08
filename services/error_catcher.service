@@ -1,0 +1,17 @@
+#/etc/systemd/system/error_catcher.service
+
+[Unit]
+Description=EnergyMonitoring ErrorCatcher Service
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+WatchdogSec=3600
+Restart=always
+RestartSec=1
+User=mateusz
+ExecStart=/usr/bin/python3 /home/mateusz/EnergyMonitoring/error_catcher/error_catcher.py
+
+[Install]
+WantedBy=multi-user.target

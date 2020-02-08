@@ -1,0 +1,18 @@
+#/etc/systemd/system/inverter.service
+
+[Unit]
+Description=EnergyMonitoring Inverter Service
+After=network.target
+After=controller.service
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+WatchdogSec=3600
+Restart=always
+RestartSec=1
+User=mateusz
+ExecStart=/usr/bin/python3 /home/mateusz/EnergyMonitoring/inverter/inverter.py
+
+[Install]
+WantedBy=multi-user.target
